@@ -24,7 +24,13 @@ jobs:
 #         source $HOME/.local/bin/
 #         poetry config virtualenvs.create false
 
-
+      - name: Set up PostgreSQL
+        uses: aunsager/setup-postgres@v1
+        with:
+            postgres-version: '16'
+            port: 5432
+            username: postgres
+            password: postgres
 
 
 
