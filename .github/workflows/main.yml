@@ -46,12 +46,17 @@ jobs:
         run: |
           pip install -r requirements.txt
 
+      - name: Make migrations
+        run: |
+          cd devops_demo
+          python manage.py makemigrations
+          python manage.py migrate
+          
       - name: Run tests
         run: |
           cd devops_demo
           python manage.py test
-          
-      - name: Build Docker image
+      - name: Build Docker image (if successful)
         if: success()
         run: |
           docker build -t myimage:${{ github.sha }} .
