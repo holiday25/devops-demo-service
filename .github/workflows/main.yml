@@ -42,6 +42,7 @@ jobs:
 
       - name: Run tests
         run: |
+          cd devops_demo
           python manage.py test
           
       - name: Build Docker image
