@@ -59,6 +59,7 @@ jobs:
           
       - name: Run tests
         env:
+          DB_ENGINE: ${{secrets.DB_ENGINE}}
           DB_NAME: ${{ secrets.DB_NAME }}
           DB_USER: ${{ secrets.DB_USER }}
           DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
