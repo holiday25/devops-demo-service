@@ -6,9 +6,19 @@ on:
       - main
 
 jobs:
-  build:
+  runner-job:
+    # You must use a Linux environment when using service containers or container jobs
     runs-on: ubuntu-latest
 
+    # Service containers to run with `runner-job`
+    services:
+      # Label used to access the service container
+      postgres:
+        # Docker Hub image
+        image: postgres:alpine
+        ports:
+          # Maps tcp port 5432 on service container to the host
+          - 5432:5432
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -23,16 +33,6 @@ jobs:
           curl -sSL https://install.python-poetry.org | python3 -
 #         source $HOME/.local/bin/
 #         poetry config virtualenvs.create false
-
-      - name: Set up PostgreSQL
-        uses: aunsager/setup-postgres@v1
-        with:
-            postgres-version: '16'
-            port: 5432
-            username: postgres
-            password: postgres
-
-
 
       - name: Install dependencies with Poetry
         run: |
